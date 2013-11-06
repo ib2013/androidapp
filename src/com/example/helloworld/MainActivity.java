@@ -113,8 +113,11 @@ public class MainActivity extends Activity {
 
 		// Util.setDebugModeEnabled(false);
 		
+		
+		//Uljepsavanje notificationa
+		
 		PushNotificationBuilder builder = new PushNotificationBuilder(getApplicationContext());
-		builder.setIconDrawableId(R.drawable.ic_launcher);
+		builder.setIconDrawableId(R.drawable.tpb);
 		
 	}
 	
