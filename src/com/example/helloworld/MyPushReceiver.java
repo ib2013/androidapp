@@ -24,8 +24,9 @@ public class MyPushReceiver extends AbstractPushReceiver {
     }
     @Override
     public void onNotificationReceived(PushNotification notification, Context context) {
-    	Toast.makeText(context, "Received notification: " + notification.toString(), 
-             Toast.LENGTH_SHORT).show();
+    	//Toast.makeText(context, "Received notification: " + notification.toString(), 
+          //   Toast.LENGTH_SHORT).show();
+    	//podesavanje ringtonea za notifikaciju
     	try {
             Uri not = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
             Ringtone r = RingtoneManager.getRingtone(context, not);
@@ -35,7 +36,7 @@ public class MyPushReceiver extends AbstractPushReceiver {
     @Override
     protected void onNotificationOpened(PushNotification notification, Context context) {
         //Toast.makeText(context, "Notification opened.", Toast.LENGTH_LONG).show();
-        
+        //otvaranje URL linka ako postoji u notifikaciji
     	if (notification.getMimeType().equals("text/html")) {
     		   if (notification.getUrl() != null) {
     		    Intent notificationInt = new Intent(Intent.ACTION_VIEW);
