@@ -16,5 +16,23 @@
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
+    
+    <style name="myTheme" parent="AppTheme">     
+    	<item name="android:actionBarStyle">@style/Theme.MyAppTheme.ActionBar</item>
+    	
+    </style>
 
+        <color name="crvena_light">#33B5E5</color>
+    <color name="crvena_dark">#0099CC</color>
+    <color name="bela">#FFFFFF</color>
+    
+    <style name="Theme.MyAppTheme.ActionBar" parent="android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">@color/crvena_dark</item>
+        <item name="android:titleTextStyle">@style/Theme.MyAppTheme.ActionBar.TitleTextStyle</item>
+        <item name="android:icon">@drawable/tpb</item>
+    </style>
+    
+        <style name="Theme.MyAppTheme.ActionBar.TitleTextStyle" parent="android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/bela</item>
+    </style>
 </resources>

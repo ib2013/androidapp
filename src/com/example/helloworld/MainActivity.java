@@ -48,6 +48,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.infobip.push.PushNotificationBuilder;
 
 public class MainActivity extends Activity {
 	MyCustomAdapter dataAdapter = null;   	// data adapter za popunjavanje ListViewa
@@ -56,6 +57,7 @@ public class MainActivity extends Activity {
 	ArrayList<String> channels;  // lista procitanih kanala
 	CheckBox checkBoxSelectAll;  // cb za selekciju svih
 	private ProgressDialog pDialog;  // progressdialog za ucitavanje liste kanala
+	PushNotificationBuilder builder;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -112,13 +114,13 @@ public class MainActivity extends Activity {
 				});
 
 		// Util.setDebugModeEnabled(false);
-		
+
 		
 		//Uljepsavanje notificationa
 		
 		PushNotificationBuilder builder = new PushNotificationBuilder(getApplicationContext());
 		builder.setIconDrawableId(R.drawable.tpb);
-		
+	
 	}
 	
 	
@@ -216,9 +218,13 @@ public class MainActivity extends Activity {
 		switch (item.getItemId()) {
 		case R.id.refresh:
 			new LoadAllChannels().execute();
-		default:
-			return super.onOptionsItemSelected(item);
+			break;
+		case R.id.settings:
+			Intent i = new Intent(MainActivity.this, SettingsActivity.class);
+			startActivity(i);
+			break;
 		}
+		return false;
 	}
 
 	// metoda koja updatuje UI na osnovu ucitane liste kanala
