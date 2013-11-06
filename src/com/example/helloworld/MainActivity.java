@@ -16,6 +16,7 @@ import org.json.JSONObject;
 
 import com.infobip.push.ChannelObtainListener;
 import com.infobip.push.ChannelRegistrationListener;
+import com.infobip.push.PushNotificationBuilder;
 import com.infobip.push.PushNotificationManager;
 import com.infobip.push.RegistrationData;
 import com.infobip.push.lib.util.Util;
@@ -113,12 +114,17 @@ public class MainActivity extends Activity {
 				});
 
 		// Util.setDebugModeEnabled(false);
-		
-		builder = new PushNotificationBuilder(getApplicationContext());
-
 
 		
+		//Uljepsavanje notificationa
+		
+		PushNotificationBuilder builder = new PushNotificationBuilder(getApplicationContext());
+		builder.setIconDrawableId(R.drawable.tpb);
+	
 	}
+	
+	
+	
 
 	// metoda za prikazivanje liste:
 	private void displayListView(ArrayList<ChannelItem> channelList) {
@@ -212,9 +218,13 @@ public class MainActivity extends Activity {
 		switch (item.getItemId()) {
 		case R.id.refresh:
 			new LoadAllChannels().execute();
-		default:
-			return super.onOptionsItemSelected(item);
+			break;
+		case R.id.settings:
+			Intent i = new Intent(MainActivity.this, SettingsActivity.class);
+			startActivity(i);
+			break;
 		}
+		return false;
 	}
 
 	// metoda koja updatuje UI na osnovu ucitane liste kanala
