@@ -1,5 +1,7 @@
 package com.example.helloworld;
 
+import com.infobip.push.PushNotificationBuilder;
+
 public class Conf {
 	public static final String senderID = "233288288285";
 	public static final String appID = "9cabf301d3db";
@@ -8,4 +10,6 @@ public class Conf {
 	public static final String url_all_channels = "https://pushapi.infobip.com/1/application/9cabf301d3db/channels";
 	public static final String headerName = "Authorization";
 	public static final String headerValue = "Basic cHVzaGRlbW86cHVzaGRlbW8=";
+	
+	static int soundControl = PushNotificationBuilder.ENABLED;
 }

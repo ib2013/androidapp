@@ -1,11 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-  <CheckBoxPreference android:title="Sound"
-                      android:defaultValue="false"
-                      android:summary="This option if selected will allow the sound on phone notifications."
-                      android:key="applicationUpdates" />
-  <CheckBoxPreference android:title="Vibration"
-                      android:defaultValue="false"
-                      android:summary="This option if selected will allow the vibration on phone notifications."
-                      android:key="applicationUpdates" />
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <SwitchPreference
+        android:key="soundUpdates"
+        android:summary="This option if selected will allow the sound on phone notifications."
+        android:title="Sound" />
+    <SwitchPreference
+        android:key="voiceUpdates"
+        android:summary="This option if selected will allow the vibration on phone notifications."
+        android:title="Vibration" />
+    <SwitchPreference
+        android:key="Quiet"
+        android:summary="This option if selected will allow the quiet time for phone notifications."
+        android:title="Quiet time" />
+    <EditTextPreference
+        android:enabled="false"
+        android:key="startQuiet"
+        android:summary="This option if entered will allow the quiet time starting point."
+        android:title="Quiet time starting point" />
+    <EditTextPreference
+        android:enabled="false"
+        android:defaultValue="false"
+        android:key="endQuiet"
+        android:summary="This option if entered will allow the quiet time ending point."
+        android:title="Quiet time ending point" />
+
 </PreferenceScreen>

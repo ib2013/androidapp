@@ -58,6 +58,7 @@ public class MainActivity extends Activity {
 	CheckBox checkBoxSelectAll;  // cb za selekciju svih
 	private ProgressDialog pDialog;  // progressdialog za ucitavanje liste kanala
 	PushNotificationBuilder builder;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -120,6 +121,7 @@ public class MainActivity extends Activity {
 		
 		PushNotificationBuilder builder = new PushNotificationBuilder(getApplicationContext());
 		builder.setIconDrawableId(R.drawable.tpb);
+		builder.setSound(Conf.soundControl);
 	
 	}
 	
