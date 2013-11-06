@@ -180,6 +180,9 @@ public class MainActivity extends Activity {
 			holder.channelName.setText(channelItem.getName());
 			holder.checkbox.setChecked(channelItem.getSelected());
 			holder.checkbox.setTag(channelItem);
+			//holder.name.setText(channelItem.getName());
+			holder.checkbox.setChecked(channelItem.getSelected());
+			holder.checkbox.setTag(channelItem);
 			return convertView;
 		}
 
