@@ -29,6 +29,7 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.example.helloworld.MainActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,10 +37,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.example.helloworld.TestChannel"
-            android:label="Channel 1" >
-        </activity>
+        
 
         <service android:name="com.infobip.push.lib.InfobipPushService" />
 

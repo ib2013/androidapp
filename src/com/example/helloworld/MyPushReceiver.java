@@ -3,6 +3,8 @@ package com.example.helloworld;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
 import android.net.Uri;
 import android.widget.Toast;
 
@@ -24,16 +26,26 @@ public class MyPushReceiver extends AbstractPushReceiver {
     public void onNotificationReceived(PushNotification notification, Context context) {
     	Toast.makeText(context, "Received notification: " + notification.toString(), 
              Toast.LENGTH_SHORT).show();
+    	try {
+            Uri not = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            Ringtone r = RingtoneManager.getRingtone(context, not);
+            r.play();
+        } catch (Exception e) {}
     }
     @Override
     protected void onNotificationOpened(PushNotification notification, Context context) {
         //Toast.makeText(context, "Notification opened.", Toast.LENGTH_LONG).show();
         
-        Intent notificationInt = new Intent(Intent.ACTION_VIEW);
-        notificationInt.setData(Uri.parse(notification.getUrl()));
-        //Toast.makeText(context, "" + notificationInt.getData(), Toast.LENGTH_LONG).show();
-        notificationInt.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(notificationInt);
+    	if (notification.getMimeType().equals("text/html")) {
+    		   if (notification.getUrl() != null) {
+    		    Intent notificationInt = new Intent(Intent.ACTION_VIEW);
+    		    notificationInt.setData(Uri.parse(notification.getUrl()));
+    		    notificationInt.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    		    context.startActivity(notificationInt);
+    		   } else
+    		    return;
+    		  } else
+    		   return;
         
     }
     @Override

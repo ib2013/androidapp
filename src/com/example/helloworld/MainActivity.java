@@ -31,6 +31,8 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -38,6 +40,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -63,8 +67,9 @@ public class MainActivity extends Activity {
 
 	TextView tvTekst;
 	
+	CheckBox checkBoxSelectAll;
+	
 	private ProgressDialog pDialog;
-	private JSONParser jParser;
 	private static String url_all_channels = "http://get_all_channels_script.php";
 
 	@Override
@@ -83,18 +88,7 @@ public class MainActivity extends Activity {
 		
 		
 		new LoadAllChannels().execute();
-		
-		//final RegistrationData registrationData = new RegistrationData();
-		
-		//napravi listu ChannelItema
-		//ovo ce kasnije trebati dinamicki napraviti, hasad hardcodeano:
-		/*		
-		channelList.add(new ChannelItem("Test channel 1", false));
-		channelList.add(new ChannelItem("Test channel 2", false));
-		channelList.add(new ChannelItem("Test channel 3", false));
-		*/
-		
-		
+			
 		
 		//Subscribe button click:
 		final Button subscribeButton = (Button) findViewById(R.id.button1);
@@ -115,6 +109,22 @@ public class MainActivity extends Activity {
             }
         });
 		
+        checkBoxSelectAll = (CheckBox) findViewById(R.id.checkBoxSelectAll);
+        
+        checkBoxSelectAll.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				if (isChecked) {
+					for (ChannelItem channelItem : channelList) 
+						channelItem.setSelected(true);
+					//Generate list View from ArrayList
+					displayListView(channelList);
+				}				
+			}
+		});
+        
+        
 		Util.setDebugModeEnabled(false);
 	  }
 	
@@ -169,6 +179,8 @@ public class MainActivity extends Activity {
 						CheckBox cb = (CheckBox) v ;  
 						ChannelItem channelItem = (ChannelItem) cb.getTag();  
 						channelItem.setSelected(cb.isChecked());
+						if (!cb.isChecked())
+							checkBoxSelectAll.setChecked(false);
 					}  
 				});  
 			} 
@@ -193,10 +205,23 @@ public class MainActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.main, menu);
+	    
 		return true;
 	}
 	
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    // Handle presses on the action bar items
+	    switch (item.getItemId()) {
+	        case R.id.refresh :
+	        	new LoadAllChannels().execute();
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
+	}
 	
 	
 	
@@ -207,11 +232,32 @@ public class MainActivity extends Activity {
 	
 	private void addItemsOnListView() {
 		Toast.makeText(this, "USPESNO POKUPLJENI KANALI." + channels,	Toast.LENGTH_LONG).show();
+		channelList.clear();
 		for (String str : channels) 
 			channelList.add(new ChannelItem(str, false));
-		//Generate list View from ArrayList
-		displayListView(channelList);
 		
+		//provjera koji su channeli vec subscribani:
+		
+		manager.getRegisteredChannels(new ChannelObtainListener() {
+
+			@Override
+			public void onChannelsObtained(String[] channels) {
+				for (ChannelItem channelItem : channelList) 
+					for (String str : channels)
+						if (channelItem.getName().equals(str)) 
+							channelItem.setSelected(true);	
+				//Generate list View from ArrayList
+				displayListView(channelList);
+			}
+
+			@Override
+			public void onChannelObtainFailed(int reason) {
+				//Generate list View from ArrayList
+				displayListView(channelList);
+			}
+			
+		});
+
 	}
 	
 	
