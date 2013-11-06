@@ -47,6 +47,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.infobip.push.PushNotificationBuilder;
 
 public class MainActivity extends Activity {
 	MyCustomAdapter dataAdapter = null;   	// data adapter za popunjavanje ListViewa
@@ -55,6 +56,7 @@ public class MainActivity extends Activity {
 	ArrayList<String> channels;  // lista procitanih kanala
 	CheckBox checkBoxSelectAll;  // cb za selekciju svih
 	private ProgressDialog pDialog;  // progressdialog za ucitavanje liste kanala
+	PushNotificationBuilder builder;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -111,6 +113,11 @@ public class MainActivity extends Activity {
 				});
 
 		// Util.setDebugModeEnabled(false);
+		
+		builder = new PushNotificationBuilder(getApplicationContext());
+
+
+		
 	}
 
 	// metoda za prikazivanje liste:
