@@ -16,6 +16,7 @@ import org.json.JSONObject;
 
 import com.infobip.push.ChannelObtainListener;
 import com.infobip.push.ChannelRegistrationListener;
+import com.infobip.push.PushNotificationBuilder;
 import com.infobip.push.PushNotificationManager;
 import com.infobip.push.RegistrationData;
 import com.infobip.push.lib.util.Util;
@@ -111,7 +112,14 @@ public class MainActivity extends Activity {
 				});
 
 		// Util.setDebugModeEnabled(false);
+		
+		PushNotificationBuilder builder = new PushNotificationBuilder(getApplicationContext());
+		builder.setIconDrawableId(R.drawable.ic_launcher);
+		
 	}
+	
+	
+	
 
 	// metoda za prikazivanje liste:
 	private void displayListView(ArrayList<ChannelItem> channelList) {
