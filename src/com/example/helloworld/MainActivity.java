@@ -154,8 +154,8 @@ public class MainActivity extends Activity {
 		}
 		
 		private class ViewHolder {
-			   TextView code;
-			   CheckBox name;
+			   TextView channelName;
+			   CheckBox checkbox;
 		}
 			 
 		@Override
@@ -170,11 +170,11 @@ public class MainActivity extends Activity {
 				convertView = vi.inflate(R.layout.list_channel, null);
 			 
 				holder = new ViewHolder();
-				holder.code = (TextView) convertView.findViewById(R.id.textView1);
-				holder.name = (CheckBox) convertView.findViewById(R.id.checkBox1);
+				holder.channelName = (TextView) convertView.findViewById(R.id.textView1);
+				holder.checkbox = (CheckBox) convertView.findViewById(R.id.checkBox1);
 				convertView.setTag(holder);
 			 
-				holder.name.setOnClickListener( new View.OnClickListener() {  
+				holder.checkbox.setOnClickListener( new View.OnClickListener() {  
 					public void onClick(View v) {  
 						CheckBox cb = (CheckBox) v ;  
 						ChannelItem channelItem = (ChannelItem) cb.getTag();  
@@ -189,10 +189,10 @@ public class MainActivity extends Activity {
 			}
 			 
 			ChannelItem channelItem = channelList.get(position);
-			holder.code.setText(channelItem.getName());
+			holder.channelName.setText(channelItem.getName());
 			//holder.name.setText(channelItem.getName());
-			holder.name.setChecked(channelItem.getSelected());
-			holder.name.setTag(channelItem);
+			holder.checkbox.setChecked(channelItem.getSelected());
+			holder.checkbox.setTag(channelItem);
 			 
 			return convertView;
 			 
