@@ -31,6 +31,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -47,7 +49,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends Activity {
+public class MainActivity extends ActionBarActivity {
+	
 	MyCustomAdapter dataAdapter = null; // data adapter za popunjavanje ListViewa
 	private PushNotificationManager manager;// infobip manager
 	final ArrayList<ChannelItem> channelList = new ArrayList<ChannelItem>(); // lista kanala za prikaz u listView
