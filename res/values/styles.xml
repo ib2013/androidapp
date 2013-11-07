@@ -4,7 +4,7 @@
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
-    <style name="AppBaseTheme" parent="android:Theme.Light">
+    <style name="AppBaseTheme" parent="@style/Theme.AppCompat.Light">
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
@@ -18,7 +18,7 @@
     </style>
     
     <style name="myTheme" parent="AppTheme">     
-    	<item name="android:actionBarStyle">@style/Theme.MyAppTheme.ActionBar</item>
+    	<item name="actionBarStyle">@style/Theme.MyAppTheme.ActionBar</item>
     	
     </style>
 
@@ -26,10 +26,10 @@
     <color name="crvena_dark">#FF7000</color>
     <color name="bela">#FFFFFF</color>
     
-    <style name="Theme.MyAppTheme.ActionBar" parent="android:style/Widget.Holo.Light.ActionBar">
-        <item name="android:background">@color/crvena_dark</item>
-        <item name="android:titleTextStyle">@style/Theme.MyAppTheme.ActionBar.TitleTextStyle</item>
-        <item name="android:icon">@drawable/tpb</item>
+    <style name="Theme.MyAppTheme.ActionBar" parent="@style/Widget.AppCompat.ActionBar">
+        <item name="background">@color/crvena_dark</item>
+        <item name="titleTextStyle">@style/Theme.MyAppTheme.ActionBar.TitleTextStyle</item>
+        <item name="icon">@drawable/tpb</item>
     </style>
     
         <style name="Theme.MyAppTheme.ActionBar.TitleTextStyle" parent="android:style/TextAppearance.Holo.Widget.ActionBar.Title">

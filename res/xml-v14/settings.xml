@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <CheckBoxPreference
+    <SwitchPreference
         android:key="soundUpdates"
         android:summary="This option if selected will allow the sound on phone notifications."
         android:title="Sound" />
-    <CheckBoxPreference
+    <SwitchPreference
         android:key="vibrateUpdates"
         android:summary="This option if selected will allow the vibration on phone notifications."
         android:title="Vibration" />
-    <CheckBoxPreference
+    <SwitchPreference
         android:key="quietUpdates"
         android:defaultValue="0"
         android:summary="This option if selected will allow the quiet time for phone notifications."
