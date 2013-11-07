@@ -99,6 +99,7 @@ public class MainActivity extends Activity {
 						.show();
 			}
 		});
+		
 
 		// cb listener za selekciju svih kanala u listi
 		checkBoxSelectAll = (CheckBox) findViewById(R.id.checkBoxSelectAll);

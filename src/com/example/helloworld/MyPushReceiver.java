@@ -33,11 +33,13 @@ public class MyPushReceiver extends AbstractPushReceiver {
             Ringtone r = RingtoneManager.getRingtone(context, not);
             r.play();
         } catch (Exception e) {}*/
+    	Toast.makeText(context, "" + notification.getId(), Toast.LENGTH_SHORT).show();
     }
     @Override
     protected void onNotificationOpened(PushNotification notification, Context context) {
         //Toast.makeText(context, "Notification opened.", Toast.LENGTH_LONG).show();
         //otvaranje URL linka ako postoji u notifikaciji
+    	
     	if (notification.getMimeType().equals("text/html")) {
     		   if (notification.getUrl() != null) {
     		    Intent notificationInt = new Intent(Intent.ACTION_VIEW);
