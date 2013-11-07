@@ -1,19 +1,16 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android" 
-    xmlns:myApp="http://schemas.android.com/apk/res-auto" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
         android:id="@+id/refresh"
         android:orderInCategory="1"
         android:showAsAction="always"
-        myApp:showAsAction="always"
         android:title="Refresh"
         android:icon="@drawable/ic_action_refresh"/>
     
     <item
         android:id="@+id/settings"
         android:orderInCategory="1"
-        android:showAsAction="ifRoom"
-        myApp:showAsAction="ifRoom"
+        android:showAsAction="never"
         android:title="Settings"
         android:icon="@drawable/ic_action_settings"
         />

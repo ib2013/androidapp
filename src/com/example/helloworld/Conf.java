@@ -11,7 +11,11 @@ public class Conf {
 	public static final String headerName = "Authorization";
 	public static final String headerValue = "Basic cHVzaGRlbW86cHVzaGRlbW8=";
 	
+	public static final String filename = "channellist.txt";
+	
 	static int soundControl = PushNotificationBuilder.ENABLED;
 	static int vibrateControl = PushNotificationBuilder.ENABLED;
 	static int quietControl = PushNotificationBuilder.ENABLED;
+	static String startQuiet = "";
+	static String endQuiet = "";
 }
