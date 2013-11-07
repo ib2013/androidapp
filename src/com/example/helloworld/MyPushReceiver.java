@@ -27,11 +27,12 @@ public class MyPushReceiver extends AbstractPushReceiver {
     	//Toast.makeText(context, "Received notification: " + notification.toString(), 
           //   Toast.LENGTH_SHORT).show();
     	//podesavanje ringtonea za notifikaciju
-    	try {
+    	//if (Conf.soundControl) 
+    	/*try {
             Uri not = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
             Ringtone r = RingtoneManager.getRingtone(context, not);
             r.play();
-        } catch (Exception e) {}
+        } catch (Exception e) {}*/
     }
     @Override
     protected void onNotificationOpened(PushNotification notification, Context context) {

@@ -12,4 +12,6 @@ public class Conf {
 	public static final String headerValue = "Basic cHVzaGRlbW86cHVzaGRlbW8=";
 	
 	static int soundControl = PushNotificationBuilder.ENABLED;
+	static int vibrateControl = PushNotificationBuilder.ENABLED;
+	static int quietControl = PushNotificationBuilder.ENABLED;
 }

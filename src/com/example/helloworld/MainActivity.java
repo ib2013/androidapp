@@ -23,12 +23,16 @@ import com.infobip.push.lib.util.Util;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.Preference;
+import android.preference.PreferenceManager;
+import android.preference.SwitchPreference;
 import android.app.Activity;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -48,6 +52,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.infobip.push.PushNotificationBuilder;
 
 public class MainActivity extends Activity {
@@ -57,13 +62,14 @@ public class MainActivity extends Activity {
 	ArrayList<String> channels;  // lista procitanih kanala
 	CheckBox checkBoxSelectAll;  // cb za selekciju svih
 	private ProgressDialog pDialog;  // progressdialog za ucitavanje liste kanala
-	PushNotificationBuilder builder;
+	//PushNotificationBuilder builder;
 	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		//PreferenceManager.setDefaultValues(this, R.xml.settings, true);
 
 		// inicijalizira stvari za Push Notification:
 		manager = new PushNotificationManager(getApplicationContext());
@@ -116,17 +122,55 @@ public class MainActivity extends Activity {
 
 		// Util.setDebugModeEnabled(false);
 
-		
+		customizeNotificationParams();
 		//Uljepsavanje notificationa
-		
-		PushNotificationBuilder builder = new PushNotificationBuilder(getApplicationContext());
-		builder.setIconDrawableId(R.drawable.tpb);
+		PushNotificationBuilder builder;
+		builder = new PushNotificationBuilder(getApplicationContext());
+		builder.setIconDrawableId(R.drawable.ic_launcher);
 		builder.setSound(Conf.soundControl);
 	
 	}
 	
+	protected void customizeNotificationParams() {
+		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+		boolean soundToggle = pref.getBoolean("soundUpdates", true);
+		boolean vibrateToggle = pref.getBoolean("vibrateUpdates", true);
+		boolean quietToggle = pref.getBoolean("quietUpdates", true);
+		if (soundToggle) {
+			Conf.soundControl = PushNotificationBuilder.ENABLED;
+		} else {
+			Conf.soundControl = PushNotificationBuilder.DISABLED;
+		}
+		if (vibrateToggle) {
+			Conf.vibrateControl = PushNotificationBuilder.ENABLED;
+		} else {
+			Conf.vibrateControl = PushNotificationBuilder.DISABLED;
+		}
+		if (quietToggle) {
+			Conf.quietControl = PushNotificationBuilder.ENABLED;
+		} else {
+			Conf.quietControl = PushNotificationBuilder.DISABLED;
+		}
+	}
 	
-	
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		customizeNotificationParams();
+		PushNotificationBuilder builder;
+		builder = new PushNotificationBuilder(getApplicationContext());
+		builder.setIconDrawableId(R.drawable.tpb);
+		builder.setSound(Conf.soundControl);
+		builder.setVibration(Conf.vibrateControl);
+		//builder = new PushNotificationBuilder(getApplicationContext());
+		//builder.setIconDrawableId(R.drawable.tpb);
+		//builder.setSound(Conf.soundControl);
+	}
+
+
+
 
 	// metoda za prikazivanje liste:
 	private void displayListView(ArrayList<ChannelItem> channelList) {
@@ -195,7 +239,6 @@ public class MainActivity extends Activity {
 			holder.channelName.setText(channelItem.getName());
 			holder.checkbox.setChecked(channelItem.getSelected());
 			holder.checkbox.setTag(channelItem);
-			//holder.name.setText(channelItem.getName());
 			holder.checkbox.setChecked(channelItem.getSelected());
 			holder.checkbox.setTag(channelItem);
 			return convertView;

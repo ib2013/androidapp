@@ -6,14 +6,27 @@
         android:summary="This option if selected will allow the sound on phone notifications."
         android:title="Sound" />
     <SwitchPreference
-        android:key="voiceUpdates"
+        android:key="vibrateUpdates"
         android:summary="This option if selected will allow the vibration on phone notifications."
         android:title="Vibration" />
     <SwitchPreference
-        android:key="Quiet"
+        android:key="quietUpdates"
+        android:defaultValue="0"
         android:summary="This option if selected will allow the quiet time for phone notifications."
         android:title="Quiet time" />
-    <EditTextPreference
+    <EditTextPreference 
+        android:key="start"
+        android:dependency="quietUpdates"
+        android:summary="This option if entered will allow the quiet time starting point."
+        android:title="Quiet time starting point" 
+    />
+    <EditTextPreference 
+        android:key="stop"
+        android:dependency="quietUpdates"
+        android:summary="This option if entered will allow the quiet time starting point."
+        android:title="Quiet time starting point" 
+    />
+    <!-- <EditTextPreference
         android:enabled="false"
         android:key="startQuiet"
         android:summary="This option if entered will allow the quiet time starting point."
@@ -23,6 +36,6 @@
         android:defaultValue="false"
         android:key="endQuiet"
         android:summary="This option if entered will allow the quiet time ending point."
-        android:title="Quiet time ending point" />
+        android:title="Quiet time ending point" />-->
 
 </PreferenceScreen>
