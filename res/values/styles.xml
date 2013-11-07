@@ -23,7 +23,7 @@
     </style>
 
         <color name="crvena_light">#33B5E5</color>
-    <color name="crvena_dark">#0099CC</color>
+    <color name="crvena_dark">#FF7000</color>
     <color name="bela">#FFFFFF</color>
     
     <style name="Theme.MyAppTheme.ActionBar" parent="android:style/Widget.Holo.Light.ActionBar">

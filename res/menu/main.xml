@@ -12,6 +12,7 @@
         android:orderInCategory="1"
         android:showAsAction="always"
         android:title="Settings"
+        android:icon="@drawable/ic_action_settings"
         />
 
 </menu>

@@ -17,13 +17,13 @@
     <EditTextPreference 
         android:key="start"
         android:dependency="quietUpdates"
-        android:summary="This option if entered will allow the quiet time starting point."
+        android:summary="This option if entered will allow the quiet time starting point. Time format is HH:MM"
         android:title="Quiet time starting point" 
     />
     <EditTextPreference 
         android:key="stop"
         android:dependency="quietUpdates"
-        android:summary="This option if entered will allow the quiet time starting point."
+        android:summary="This option if entered will allow the quiet time starting point. Time format is HH:MM"
         android:title="Quiet time starting point" 
     />
     <!-- <EditTextPreference
