@@ -243,7 +243,7 @@ public class MainActivity extends ActionBarActivity {
 	void notificationConfig() {
 		builder = new PushNotificationBuilder(getApplicationContext());
 		customizeNotificationParams();
-		builder.setIconDrawableId(R.drawable.logo);
+		builder.setIconDrawableId(R.drawable.feed2push_notification_icon);
 		builder.setSound(Conf.soundControl);
 		builder.setVibration(Conf.vibrateControl);
 	}

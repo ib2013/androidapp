@@ -27,7 +27,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/logo"
+        android:icon="@drawable/feed2push"
         android:label="@string/app_name"
         android:theme="@style/myTheme" >
         <activity

@@ -25,7 +25,7 @@
     <style name="Theme.MyAppTheme.ActionBar" parent="@style/Widget.AppCompat.ActionBar">
         <item name="android:background">@color/crvena_dark</item>
         <item name="android:titleTextStyle">@style/Theme.MyAppTheme.ActionBar.TitleTextStyle</item>
-        <item name="android:icon">@drawable/logo2</item>
+        <item name="android:icon">@drawable/feed2push_white_icon</item>
     </style>
     
         <style name="Theme.MyAppTheme.ActionBar.TitleTextStyle" parent="android:style/TextAppearance.Holo.Widget.ActionBar.Title">
