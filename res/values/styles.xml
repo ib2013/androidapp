@@ -17,7 +17,7 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
     
-    <style name="myTheme" parent="AppTheme">     
+    <style name="myTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">     
     	<item name="actionBarStyle">@style/Theme.MyAppTheme.ActionBar</item>
     	
     </style>

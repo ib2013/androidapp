@@ -17,10 +17,11 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
     
-    <style name="myTheme" parent="@style/Theme.AppCompat.Light">     
+    <style name="myTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">     
     	<item name="android:actionBarStyle">@style/Theme.MyAppTheme.ActionBar</item>
     	
     </style>
+    
     
     <style name="Theme.MyAppTheme.ActionBar" parent="@style/Widget.AppCompat.ActionBar">
         <item name="android:background">@color/crvena_dark</item>

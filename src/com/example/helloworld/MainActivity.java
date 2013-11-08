@@ -366,6 +366,29 @@ public class MainActivity extends ActionBarActivity {
 			}
 		});
 	    
+	    
+	    // When using the support library, the setOnActionExpandListener() method is
+	    // static and accepts the MenuItem object as an argument
+	    MenuItemCompat.setOnActionExpandListener(searchItem, new MenuItemCompat.OnActionExpandListener() {
+		
+	    	@Override
+	    	public boolean onMenuItemActionExpand(MenuItem arg0) {
+	    		findViewById(R.id.button1).setVisibility(View.GONE);
+	    		findViewById(R.id.layoutSaSellectAllCheckboxom).setVisibility(View.GONE);
+	    		return true;
+	    	}
+		
+	    	@Override
+	    	public boolean onMenuItemActionCollapse(MenuItem arg0) {
+	    		filterZaListuKanala = "";
+	    		addItemsOnListView();
+	    		displayListView(channelList);
+	    		findViewById(R.id.button1).setVisibility(View.VISIBLE);
+	    		findViewById(R.id.layoutSaSellectAllCheckboxom).setVisibility(View.VISIBLE);
+	    		return true;
+	    	}
+	    });
+	    
 	    /*
 	    searchView.setOnQueryTextFocusChangeListener(new OnFocusChangeListener() {
 
@@ -374,24 +397,12 @@ public class MainActivity extends ActionBarActivity {
 				filterZaListuKanala = "";
 				addItemsOnListView();
 				displayListView(channelList);
-				
+				findViewById(R.id.button1).setVisibility(View.VISIBLE);
+				findViewById(R.id.layoutSaSellectAllCheckboxom).setVisibility(View.VISIBLE);
 			}
 	    	
 	    }); 
-	    
-	    searchView.setOnKeyListener(new OnKeyListener() {
-			
-			@Override
-			public boolean onKey(View v, int keyCode, KeyEvent event) {
-				if (keyCode == KeyEvent.KEYCODE_BACK) {
-					filterZaListuKanala = "";
-					addItemsOnListView();
-					displayListView(channelList);
-				}
-				return false;
-			}
-		}); 
-		*/
+	    */
 		
 	    
 		return true;
@@ -410,11 +421,6 @@ public class MainActivity extends ActionBarActivity {
 			Intent i = new Intent(MainActivity.this, SettingsActivity.class);
 			startActivity(i);
 			break;
-		case android.R.id.home :
-			filterZaListuKanala = "";
-			addItemsOnListView();
-			displayListView(channelList);
-			break;
 		}
 		return false;
 	}
@@ -425,7 +431,7 @@ public class MainActivity extends ActionBarActivity {
 		// Toast.LENGTH_LONG).show();
 		channelList.clear();
 		for (String str : channels)	
-			if (str.contains(filterZaListuKanala))
+			if (str.toLowerCase().contains(filterZaListuKanala.toLowerCase()))
 				channelList.add(new ChannelItem(str, false));
 
 		// provjera koji su channeli vec subscribani i cekiraj ih:
