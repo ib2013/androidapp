@@ -81,6 +81,29 @@ public class MainActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		//ADDED PARAMS FOR NOTIFICATION - PUT THEM IN SEPARATE METHOD IF OKAY
+		//=========================================================================================================
+		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+		boolean soundToggle = pref.getBoolean("soundUpdates", true);
+		boolean vibrateToggle = pref.getBoolean("vibrateUpdates", true);
+		boolean quietToggle = pref.getBoolean("quietUpdates", false);
+		if (soundToggle) {
+			Conf.soundControl = PushNotificationBuilder.ENABLED;
+		} else {
+			Conf.soundControl = PushNotificationBuilder.DISABLED;
+		}
+		if (vibrateToggle) {
+			Conf.vibrateControl = PushNotificationBuilder.ENABLED;
+		} else {
+			Conf.vibrateControl = PushNotificationBuilder.DISABLED;
+		}
+		if (quietToggle) {
+			Conf.quietControl = PushNotificationBuilder.ENABLED;
+		} else {
+			Conf.quietControl = PushNotificationBuilder.DISABLED;
+		}
+		//=========================================================================================================
 		// PreferenceManager.setDefaultValues(this, R.xml.settings, true);
 		// inicijalizira stvari za Push Notification:
 		manager = new PushNotificationManager(getApplicationContext());
