@@ -62,10 +62,10 @@
         android:id="@+id/button1"
         android:layout_alignParentBottom="true"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginBottom="16dp"
         android:layout_weight="0"
         android:text="Subscribe!" />
 
@@ -76,7 +76,9 @@
         android:layout_alignParentBottom="true"
         android:background="@color/crvena_dark"
         android:orientation="horizontal"
-        android:visibility="gone" >
+        android:clickable="true"
+        android:visibility="gone"
+         >
 
         <TextView
             android:id="@+id/textView1"
@@ -88,13 +90,20 @@
             android:layout_weight="1"
             android:textColor="@color/bela" />
 
+        <FrameLayout
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:background="@color/bela" >
+        </FrameLayout>
+
         <ImageButton
             android:id="@+id/refreshButton1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             android:layout_weight="0"
-            android:layout_margin="10dp"
-            android:src="@drawable/ic_action_refresh" />
+            android:src="@drawable/ic_action_refresh"
+            android:background="@null" />
 
     </LinearLayout>
     
