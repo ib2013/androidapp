@@ -18,4 +18,6 @@ public class Conf {
 	static int quietControl = PushNotificationBuilder.ENABLED;
 	static String startQuiet = "";
 	static String endQuiet = "";
+	
+	static String sourcenot = "";
 }

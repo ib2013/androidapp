@@ -986,7 +986,10 @@ containing a value of this type.
         public static final int ic_action_refresh=0x7f020057;
         public static final int ic_action_settings=0x7f020058;
         public static final int ic_launcher=0x7f020059;
-        public static final int tpb=0x7f02005a;
+        public static final int logo=0x7f02005a;
+        public static final int logo2=0x7f02005b;
+        public static final int tpb=0x7f02005c;
+        public static final int ytb=0x7f02005d;
     }
     public static final class id {
         public static final int action_bar=0x7f06001c;

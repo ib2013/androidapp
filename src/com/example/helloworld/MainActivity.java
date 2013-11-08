@@ -57,7 +57,7 @@ public class MainActivity extends ActionBarActivity {
 	ArrayList<String> channels; // lista procitanih kanala
 	CheckBox checkBoxSelectAll; // cb za selekciju svih
 	private ProgressDialog pDialog; // progressdialog za ucitavanje liste kanala
-	PushNotificationBuilder builder;
+	static PushNotificationBuilder builder;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -102,7 +102,6 @@ public class MainActivity extends ActionBarActivity {
 						.show();
 			}
 		});
-		
 
 		// cb listener za selekciju svih kanala u listi
 		checkBoxSelectAll = (CheckBox) findViewById(R.id.checkBoxSelectAll);
@@ -121,13 +120,10 @@ public class MainActivity extends ActionBarActivity {
 					}
 				});
 
-		Util.setDebugModeEnabled(false);
+		//Util.setDebugModeEnabled(false);
 		// Uljepsavanje notificationa
 		// PushNotificationBuilder builder;
-		builder = new PushNotificationBuilder(getApplicationContext());
-		customizeNotificationParams();
-		builder.setIconDrawableId(R.drawable.ic_launcher);
-		builder.setSound(Conf.soundControl);
+		notificationConfig();
 	}
 
 	protected void customizeNotificationParams() {
@@ -241,12 +237,18 @@ public class MainActivity extends ActionBarActivity {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+		notificationConfig();
+	}
+	
+	void notificationConfig() {
 		builder = new PushNotificationBuilder(getApplicationContext());
 		customizeNotificationParams();
-		builder.setIconDrawableId(R.drawable.tpb);
+		builder.setIconDrawableId(R.drawable.logo);
 		builder.setSound(Conf.soundControl);
 		builder.setVibration(Conf.vibrateControl);
 	}
+	
+	
 
 	// metoda za prikazivanje liste:
 	private void displayListView(ArrayList<ChannelItem> channelList) {
