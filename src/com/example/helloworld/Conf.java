@@ -1,5 +1,7 @@
 package com.example.helloworld;
 
+import android.content.Context;
+
 import com.infobip.push.PushNotificationBuilder;
 
 public class Conf {
@@ -20,4 +22,6 @@ public class Conf {
 	static String endQuiet = "";
 	
 	static String sourcenot = "";
+	
+	static public Context mainActivityContext = null;
 }

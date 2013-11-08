@@ -23,6 +23,7 @@ import com.infobip.push.PushNotificationBuilder;
 import com.infobip.push.PushNotificationManager;
 import com.infobip.push.lib.util.Util;
 
+import android.location.GpsStatus.Listener;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -46,6 +47,7 @@ import android.view.MenuItem;
 import android.view.MenuItem.OnActionExpandListener;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
 import android.view.View.OnKeyListener;
 import android.view.ViewGroup;
@@ -58,6 +60,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 public class MainActivity extends ActionBarActivity {
 	
 	MyCustomAdapter dataAdapter = null; // data adapter za popunjavanje ListViewa
@@ -69,6 +72,10 @@ public class MainActivity extends ActionBarActivity {
 	static PushNotificationBuilder builder;
 	String filterZaListuKanala = ""; //mjenja se u "searchu" u sklopu listenera definiranog u onCreateOptionsMenu metodi
 								//koristi se pri prikazivanju liste kanala
+	
+	public void RefreshChannelList () {
+		findViewById(R.id.layoutRefreshWarning).setVisibility(View.VISIBLE);
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +85,9 @@ public class MainActivity extends ActionBarActivity {
 		// inicijalizira stvari za Push Notification:
 		manager = new PushNotificationManager(getApplicationContext());
 		manager.initialize(Conf.senderID, Conf.appID, Conf.appSec);
-
+		manager.overrideDefaultMessageHandling(true);
+		Conf.mainActivityContext = this;
+		
 		if (!manager.isRegistered()) {
 			manager.register();
 		}
@@ -92,7 +101,9 @@ public class MainActivity extends ActionBarActivity {
 		}catch(Exception e) {
 			new LoadAllChannels().execute();
 		} */
-		new LoadAllChannels().execute();
+		
+		//prebaceno u onresume:
+		//new LoadAllChannels().execute();
 		
 		// Subscribe button click:
 		final Button subscribeButton = (Button) findViewById(R.id.button1);
@@ -137,8 +148,22 @@ public class MainActivity extends ActionBarActivity {
 		// Uljepsavanje notificationa
 		// PushNotificationBuilder builder;
 		notificationConfig();
+		
+		findViewById(R.id.refreshButton1).setOnClickListener(new OnClickListener() {
+			
+			public void onClick(View v) {
+				findViewById(R.id.layoutRefreshWarning).setVisibility(View.GONE);
+				new LoadAllChannels().execute();
+			}
+		});
+		
 	}
 
+	protected void onPause () {
+		super.onPause();
+		Conf.mainActivityContext = null;
+	}
+	
 	protected void customizeNotificationParams() {
 		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 		boolean soundToggle = pref.getBoolean("soundUpdates", true);
@@ -254,9 +279,10 @@ public class MainActivity extends ActionBarActivity {
 
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
+		new LoadAllChannels().execute();
 		super.onResume();
 		notificationConfig();
+		Conf.mainActivityContext = this;
 	}
 	
 	void notificationConfig() {
@@ -415,6 +441,7 @@ public class MainActivity extends ActionBarActivity {
 		switch (item.getItemId()) {
 		case R.id.refresh:
 			new LoadAllChannels().execute();
+			findViewById(R.id.layoutRefreshWarning).setVisibility(View.GONE);
 			//writeChannelListToFile(channels);
 			break;
 		case R.id.settings:
