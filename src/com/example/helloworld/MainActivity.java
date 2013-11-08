@@ -31,14 +31,23 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
+import android.support.v7.widget.SearchView;
+import android.support.v7.widget.SearchView.OnCloseListener;
+import android.support.v7.widget.SearchView.OnQueryTextListener;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MenuItem.OnActionExpandListener;
+import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
+import android.view.View.OnFocusChangeListener;
+import android.view.View.OnKeyListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -58,6 +67,8 @@ public class MainActivity extends ActionBarActivity {
 	CheckBox checkBoxSelectAll; // cb za selekciju svih
 	private ProgressDialog pDialog; // progressdialog za ucitavanje liste kanala
 	static PushNotificationBuilder builder;
+	String filterZaListuKanala = ""; //mjenja se u "searchu" u sklopu listenera definiranog u onCreateOptionsMenu metodi
+								//koristi se pri prikazivanju liste kanala
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +82,7 @@ public class MainActivity extends ActionBarActivity {
 		if (!manager.isRegistered()) {
 			manager.register();
 		}
-		try{
+	/*	try{
 			channels = readChannelListFromFile();
 			if (channels == null) {
 				new LoadAllChannels().execute();				
@@ -80,7 +91,9 @@ public class MainActivity extends ActionBarActivity {
 			}
 		}catch(Exception e) {
 			new LoadAllChannels().execute();
-		}
+		} */
+		new LoadAllChannels().execute();
+		
 		// Subscribe button click:
 		final Button subscribeButton = (Button) findViewById(R.id.button1);
 		subscribeButton.setOnClickListener(new View.OnClickListener() {
@@ -192,6 +205,10 @@ public class MainActivity extends ActionBarActivity {
 	    }
 	}
 	
+	
+	/* Ne koristi se:
+	//funkcija za  
+	 
 	private ArrayList<String> readChannelListFromFile() {
 		 String ret = "";
 	    try {
@@ -232,6 +249,8 @@ public class MainActivity extends ActionBarActivity {
 			    return chanels;
 		    }			    
 	}
+	*/
+
 
 	@Override
 	protected void onResume() {
@@ -243,7 +262,7 @@ public class MainActivity extends ActionBarActivity {
 	void notificationConfig() {
 		builder = new PushNotificationBuilder(getApplicationContext());
 		customizeNotificationParams();
-		builder.setIconDrawableId(R.drawable.feed2push_notification_icon);
+		builder.setIconDrawableId(R.drawable.feed2push_white_icon);
 		builder.setSound(Conf.soundControl);
 		builder.setVibration(Conf.vibrateControl);
 	}
@@ -252,7 +271,7 @@ public class MainActivity extends ActionBarActivity {
 
 	// metoda za prikazivanje liste:
 	private void displayListView(ArrayList<ChannelItem> channelList) {
-		// kreiraj ArrayAdaptar iz String Array
+		// kreiraj ArrayAdaptar iz String Array		
 		dataAdapter = new MyCustomAdapter(this, R.layout.list_channel, channelList);
 		ListView listView = (ListView) findViewById(R.id.listView1);
 		// dodeli adapter u ListView
@@ -327,6 +346,54 @@ public class MainActivity extends ActionBarActivity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.main, menu);
+		
+		//"search" (zapravo samo filtrira listu kanala):
+		
+		MenuItem searchItem = menu.findItem(R.id.action_search);
+	    SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+	    
+	    searchView.setOnQueryTextListener(new OnQueryTextListener() {
+			
+			public boolean onQueryTextSubmit(String arg0) {
+				return false;
+			}
+			
+			public boolean onQueryTextChange(String arg0) {
+				filterZaListuKanala = arg0;
+				addItemsOnListView();
+				displayListView(channelList);
+				return false;
+			}
+		});
+	    
+	    /*
+	    searchView.setOnQueryTextFocusChangeListener(new OnFocusChangeListener() {
+
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				filterZaListuKanala = "";
+				addItemsOnListView();
+				displayListView(channelList);
+				
+			}
+	    	
+	    }); 
+	    
+	    searchView.setOnKeyListener(new OnKeyListener() {
+			
+			@Override
+			public boolean onKey(View v, int keyCode, KeyEvent event) {
+				if (keyCode == KeyEvent.KEYCODE_BACK) {
+					filterZaListuKanala = "";
+					addItemsOnListView();
+					displayListView(channelList);
+				}
+				return false;
+			}
+		}); 
+		*/
+		
+	    
 		return true;
 	}
 
@@ -343,6 +410,11 @@ public class MainActivity extends ActionBarActivity {
 			Intent i = new Intent(MainActivity.this, SettingsActivity.class);
 			startActivity(i);
 			break;
+		case android.R.id.home :
+			filterZaListuKanala = "";
+			addItemsOnListView();
+			displayListView(channelList);
+			break;
 		}
 		return false;
 	}
@@ -352,7 +424,9 @@ public class MainActivity extends ActionBarActivity {
 		// Toast.makeText(this, "USPESNO POKUPLJENI KANALI." + channels,
 		// Toast.LENGTH_LONG).show();
 		channelList.clear();
-		for (String str : channels)	channelList.add(new ChannelItem(str, false));
+		for (String str : channels)	
+			if (str.contains(filterZaListuKanala))
+				channelList.add(new ChannelItem(str, false));
 
 		// provjera koji su channeli vec subscribani i cekiraj ih:
 		manager.getRegisteredChannels(new ChannelObtainListener() {
@@ -409,6 +483,7 @@ public class MainActivity extends ActionBarActivity {
 				while ((line = rd.readLine()) != null) {
 					textView += line;
 				}
+				
 				// parsiranje JSON formata u format ArrayList<String> channels
 				try {
 					JSONArray oneArray = new JSONArray(textView);

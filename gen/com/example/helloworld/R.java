@@ -987,12 +987,13 @@ containing a value of this type.
         public static final int feed2push_notification_icon=0x7f020058;
         public static final int feed2push_white_icon=0x7f020059;
         public static final int ic_action_refresh=0x7f02005a;
-        public static final int ic_action_settings=0x7f02005b;
-        public static final int ic_launcher=0x7f02005c;
-        public static final int logo=0x7f02005d;
-        public static final int logo2=0x7f02005e;
-        public static final int tpb=0x7f02005f;
-        public static final int ytb=0x7f020060;
+        public static final int ic_action_search=0x7f02005b;
+        public static final int ic_action_settings=0x7f02005c;
+        public static final int ic_launcher=0x7f02005d;
+        public static final int logo=0x7f02005e;
+        public static final int logo2=0x7f02005f;
+        public static final int tpb=0x7f020060;
+        public static final int ytb=0x7f020061;
     }
     public static final class id {
         public static final int action_bar=0x7f06001c;
@@ -1006,6 +1007,7 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f060016;
         public static final int action_menu_presenter=0x7f060017;
         public static final int action_mode_close_button=0x7f060024;
+        public static final int action_search=0x7f060045;
         public static final int activity_chooser_view_content=0x7f060025;
         public static final int always=0x7f06000b;
         public static final int beginning=0x7f060011;
