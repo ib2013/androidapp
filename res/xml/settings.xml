@@ -9,7 +9,7 @@
         android:key="vibrateUpdates"
         android:summary="This option if selected will allow the vibration on phone notifications."
         android:title="Vibration" />
-    <CheckBoxPreference
+    <!-- <CheckBoxPreference
         android:key="quietUpdates"
         android:defaultValue="0"
         android:summary="This option if selected will allow the quiet time for phone notifications."
@@ -26,7 +26,7 @@
         android:summary="This option if entered will allow the quiet time starting point. Time format is HH:MM"
         android:title="Quiet time starting point" 
     />
-    <!-- <EditTextPreference
+     <EditTextPreference
         android:enabled="false"
         android:key="startQuiet"
         android:summary="This option if entered will allow the quiet time starting point."

@@ -33,6 +33,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.AnimationDrawable;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -162,6 +163,12 @@ public class MainActivity extends ActionBarActivity {
 						if (isChecked) {
 							for (ChannelItem channelItem : channelList)
 								channelItem.setSelected(true);
+							// Generate list View from ArrayList
+							displayListView(channelList);
+						}
+						else {
+							for (ChannelItem channelItem : channelList)
+								channelItem.setSelected(false);
 							// Generate list View from ArrayList
 							displayListView(channelList);
 						}
@@ -307,6 +314,7 @@ public class MainActivity extends ActionBarActivity {
 		super.onResume();
 		notificationConfig();
 		Conf.mainActivityContext = this;
+		getSupportActionBar().setIcon(R.drawable.feed2push_white_icon);
 	}
 	
 	void notificationConfig() {
@@ -472,6 +480,11 @@ public class MainActivity extends ActionBarActivity {
 			Intent i = new Intent(MainActivity.this, SettingsActivity.class);
 			startActivity(i);
 			break;
+		case R.id.push_to_feed:
+			ActionBar actionBar = getSupportActionBar();
+			AnimationDrawable feedAnimation = (AnimationDrawable) getResources().getDrawable(R.drawable.animatefeed);
+			actionBar.setIcon(feedAnimation);
+			feedAnimation.start();			
 		}
 		return false;
 	}
