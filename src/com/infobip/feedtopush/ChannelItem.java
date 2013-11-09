@@ -1,5 +1,5 @@
 
-package com.example.helloworld;
+package com.infobip.feedtopush;
 
 public class ChannelItem {
 

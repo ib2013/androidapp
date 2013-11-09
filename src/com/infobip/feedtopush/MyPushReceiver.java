@@ -1,4 +1,4 @@
-package com.example.helloworld;
+package com.infobip.feedtopush;
 
 
 import java.util.Date;
@@ -14,6 +14,7 @@ import android.support.v4.app.NotificationCompat;
 import android.webkit.WebView.FindListener;
 import android.widget.Toast;
 
+import com.example.helloworld.R;
 import com.infobip.push.AbstractPushReceiver;
 import com.infobip.push.PushNotification;
 import com.infobip.push.PushNotificationBuilder;

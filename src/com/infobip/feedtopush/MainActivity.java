@@ -1,4 +1,4 @@
-package com.example.helloworld;
+package com.infobip.feedtopush;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -17,6 +17,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.example.helloworld.R;
 import com.infobip.push.ChannelObtainListener;
 import com.infobip.push.ChannelRegistrationListener;
 import com.infobip.push.PushNotificationBuilder;
@@ -479,26 +480,36 @@ public class MainActivity extends ActionBarActivity {
 	private void addItemsOnListView() {
 		// Toast.makeText(this, "USPESNO POKUPLJENI KANALI." + channels,
 		// Toast.LENGTH_LONG).show();
-		channelList.clear();
+		final ArrayList<ChannelItem> tempChannelList = new ArrayList<ChannelItem>();
+		//channelList.clear();
 		for (String str : channels)	
 			if (str.toLowerCase().contains(filterZaListuKanala.toLowerCase()))
-				channelList.add(new ChannelItem(str, false));
+				tempChannelList.add(new ChannelItem(str, false));
 
 		// provjera koji su channeli vec subscribani i cekiraj ih:
 		manager.getRegisteredChannels(new ChannelObtainListener() {
 
 			@Override
 			public void onChannelsObtained(String[] channels) {
-				for (ChannelItem channelItem : channelList)
+				for (ChannelItem channelItem : tempChannelList) {
 					for (String str : channels)
 						if (channelItem.getName().equals(str)) channelItem.setSelected(true);
-				// Generate list View from ArrayList
+					for (ChannelItem channelItemOld : channelList)
+						if (channelItemOld.getName() == channelItem.getName())
+							channelItem.setSelected(channelItemOld.getSelected());
+				}
+				channelList.clear();
+				for (ChannelItem channelItem : tempChannelList)
+					channelList.add(channelItem);
 				displayListView(channelList);
 			}
 
 			@Override
 			public void onChannelObtainFailed(int reason) {
-				// Generate list View from ArrayList
+				channelList.clear();
+				for (ChannelItem channelItem : tempChannelList)
+					channelList.add(channelItem);
+				displayListView(channelList);
 				displayListView(channelList);
 			}
 		});

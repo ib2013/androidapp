@@ -1,4 +1,6 @@
-package com.example.helloworld;
+package com.infobip.feedtopush;
+
+import com.example.helloworld.R;
 
 import android.os.Bundle;
 import android.preference.PreferenceActivity;

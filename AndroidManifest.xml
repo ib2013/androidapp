@@ -31,7 +31,7 @@
         android:label="@string/app_name"
         android:theme="@style/myTheme" >
         <activity
-            android:name="com.example.helloworld.MainActivity"
+            android:name="com.infobip.feedtopush.MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name" >
             <intent-filter>
@@ -41,7 +41,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.helloworld.SettingsActivity"
+            android:name="com.infobip.feedtopush.SettingsActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name" >
         </activity>
@@ -60,7 +60,7 @@
         </receiver>
         <receiver android:name="com.infobip.push.lib.InternalReceiver" />
         <receiver
-            android:name=".MyPushReceiver"
+            android:name="com.infobip.feedtopush.MyPushReceiver"
             android:permission="com.example.helloworld.permission.C2D_MESSAGE" >
             <intent-filter>
                 <action android:name="com.infobip.push.intent.REGISTERED_FOR_NOTIFICATIONS" />

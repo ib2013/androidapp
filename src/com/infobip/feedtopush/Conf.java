@@ -1,4 +1,4 @@
-package com.example.helloworld;
+package com.infobip.feedtopush;
 
 import android.content.Context;
 import android.content.SharedPreferences;
