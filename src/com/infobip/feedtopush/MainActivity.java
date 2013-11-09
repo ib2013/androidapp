@@ -155,12 +155,10 @@ public class MainActivity extends ActionBarActivity {
 		// cb listener za selekciju svih kanala u listi
 		checkBoxSelectAll = (CheckBox) findViewById(R.id.checkBoxSelectAll);
 		checkBoxSelectAll
-				.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-
+				.setOnClickListener(new OnClickListener() {
 					@Override
-					public void onCheckedChanged(CompoundButton buttonView,
-							boolean isChecked) {
-						if (isChecked) {
+					public void onClick(View arg0) {
+						if (checkBoxSelectAll.isChecked()) {
 							for (ChannelItem channelItem : channelList)
 								channelItem.setSelected(true);
 							// Generate list View from ArrayList
@@ -172,6 +170,7 @@ public class MainActivity extends ActionBarActivity {
 							// Generate list View from ArrayList
 							displayListView(channelList);
 						}
+						
 					}
 				});
 
